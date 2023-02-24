@@ -2,14 +2,16 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_APP_ID,
+  apiKey: "AIzaSyDyD0eRn1a9EoLKZndl4WLeKUwyC10NNwI",
+  authDomain: "cloning-twitter-7826b.firebaseapp.com",
+  projectId: "cloning-twitter-7826b",
+  storageBucket: "cloning-twitter-7826b.appspot.com",
+  messagingSenderId: "124797429627",
+  appId: "1:124797429627:web:6dffc6e07584569b453fde",
 };
 
 firebase.initializeApp(firebaseConfig);
+
+export const firebaseInstance = firebase;
 
 export const authService = firebase.auth();
