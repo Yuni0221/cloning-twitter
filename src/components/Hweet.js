@@ -12,23 +12,42 @@ function Hweet({ hweetObj, isOwner }) {
     }
   };
   const toggleEditing = () => setEditing((prev) => !prev);
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    console.log(hweetObj, newHweet);
+    await dbService.doc(`hweets/${hweetObj.id}`).update({
+      text: newHweet,
+    });
+    setEditing(false);
+  };
+  const onChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setNewHweet(value);
+  };
   return (
     <div>
       {editing ? (
         <>
-          <form>
+          <form onSubmit={onSubmit}>
             <input
               type="text"
               placeholder="Edit your hweet"
               defaultValue={newHweet}
               required
+              onChange={onChange}
             />
+            <input type="submit" value="Update Hweet" />
           </form>
           <button onClick={toggleEditing}>Cancel</button>
         </>
       ) : (
         <>
           <h4>{hweetObj.text}</h4>
+          {hweetObj.attachmentUrl && (
+            <img src={hweetObj.attachmentUrl} width="100px" height="100px" />
+          )}
           {isOwner && (
             <>
               <button onClick={onDeleteClick}>Delete Hweet</button>
