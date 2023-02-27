@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Home() {
+  const [hweet, setHweet] = useState("");
   const onSubmit = (event) => {
     event.preventDefault();
   };
+  const onChange = (event) => {};
   return (
     <div>
       <form onSubmit={onSubmit}>
