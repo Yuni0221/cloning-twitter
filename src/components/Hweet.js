@@ -1,4 +1,4 @@
-import { dbService } from "fbase";
+import { dbService, storageService } from "fbase";
 import React, { useState } from "react";
 
 function Hweet({ hweetObj, isOwner }) {
@@ -6,9 +6,9 @@ function Hweet({ hweetObj, isOwner }) {
   const [newHweet, setNewHweet] = useState(hweetObj.text);
   const onDeleteClick = async () => {
     const ok = window.confirm("Are you sure you want to delete this hweet?");
-
     if (ok) {
       await dbService.doc(`hweets/${hweetObj.id}`).delete();
+      await storageService.refFromURL(hweetObj.attachmentUrl).delete();
     }
   };
   const toggleEditing = () => setEditing((prev) => !prev);

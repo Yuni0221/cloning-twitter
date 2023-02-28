@@ -67,6 +67,7 @@ function Auth() {
           required
           value={password}
           onChange={onChange}
+          autoComplete="on"
         />
         <input type="submit" value={newAccount ? "Create Account" : "Login"} />
         {error}
