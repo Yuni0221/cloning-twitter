@@ -17,9 +17,9 @@ function Home({ userObj }) {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <HweetFactory userObj={userObj} />
-      <div>
+      <div style={{ marginTop: 30 }}>
         {hweets.map((hweet) => (
           <Hweet
             key={hweet.id}

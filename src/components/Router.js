@@ -7,24 +7,34 @@ import Navigation from "./Navigation";
 
 function AppRouter({ refreshUser, isLoggedIn, userObj }) {
   return (
-    <Router>
-      {isLoggedIn && <Navigation userObj={userObj} />}
-      <Routes>
-        {isLoggedIn ? (
-          <>
-            <Route path="/" element={<Home userObj={userObj} />} />
-            <Route
-              path="/profile"
-              element={<Profile userObj={userObj} refreshUser={refreshUser} />}
-            />
-          </>
-        ) : (
-          <>
-            <Route exact path="/" element={<Auth />} />
-          </>
-        )}
-      </Routes>
-    </Router>
+    <>
+      <Router>
+        {isLoggedIn && <Navigation userObj={userObj} />}
+        <>
+          <Routes>
+            {isLoggedIn ? (
+              <>
+                <>
+                  <Route path="/" element={<Home userObj={userObj} />} />
+                </>
+                <>
+                  <Route
+                    path="/profile"
+                    element={
+                      <Profile userObj={userObj} refreshUser={refreshUser} />
+                    }
+                  />
+                </>
+              </>
+            ) : (
+              <>
+                <Route exact path="/" element={<Auth />} />
+              </>
+            )}
+          </Routes>
+        </>
+      </Router>
+    </>
   );
 }
 

@@ -1,5 +1,7 @@
 import { dbService, storageService } from "fbase";
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 function Hweet({ hweetObj, isOwner }) {
   const [editing, setEditing] = useState(false);
@@ -27,32 +29,38 @@ function Hweet({ hweetObj, isOwner }) {
     setNewHweet(value);
   };
   return (
-    <div>
+    <div className="hweet">
       {editing ? (
         <>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={onSubmit} className="container hweetEdit">
             <input
               type="text"
               placeholder="Edit your hweet"
               defaultValue={newHweet}
               required
+              autoFocus
               onChange={onChange}
+              className="formInput"
             />
-            <input type="submit" value="Update Hweet" />
+            <input type="submit" value="Update Hweet" className="formBtn" />
           </form>
-          <button onClick={toggleEditing}>Cancel</button>
+          <button onClick={toggleEditing} className="formBtn cancelBtn">
+            Cancel
+          </button>
         </>
       ) : (
         <>
           <h4>{hweetObj.text}</h4>
-          {hweetObj.attachmentUrl && (
-            <img src={hweetObj.attachmentUrl} width="100px" height="100px" />
-          )}
+          {hweetObj.attachmentUrl && <img src={hweetObj.attachmentUrl} />}
           {isOwner && (
-            <>
-              <button onClick={onDeleteClick}>Delete Hweet</button>
-              <button onClick={toggleEditing}>Edit Hweet</button>
-            </>
+            <div class="hweet__actions">
+              <span onClick={onDeleteClick}>
+                <FontAwesomeIcon icon={faTrash} />
+              </span>
+              <span onClick={toggleEditing}>
+                <FontAwesomeIcon icon={faPencilAlt} />
+              </span>
+            </div>
           )}
         </>
       )}
